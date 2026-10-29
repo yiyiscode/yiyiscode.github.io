@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>個人網站方案選擇 Demo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;background:#111;color:#222}
+#bar{position:sticky;top:0;z-index:100;background:#1c1c1e;color:#eee;display:flex;gap:10px;align-items:center;padding:8px 16px;flex-wrap:wrap;border-bottom:1px solid #333}
+#bar .tab{border:1px solid #444;background:#2a2a2d;color:#ddd;padding:6px 14px;border-radius:6px;cursor:pointer;font:inherit;font-size:14px}
+#bar .tab.on{background:#f5c542;color:#111;border-color:#f5c542;font-weight:700}
+#bar .note{flex:1;font-size:13px;color:#aaa;min-width:240px}
+#bar .lang{margin-left:auto;display:flex;border:1px solid #444;border-radius:6px;overflow:hidden}
+#bar .lang button{border:0;background:#2a2a2d;color:#ddd;padding:6px 12px;cursor:pointer;font:inherit;font-size:14px}
+#bar .lang button.on{background:#f5c542;color:#111;font-weight:700}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+a{color:inherit}
+.chip{display:inline-block;font-size:12px;padding:2px 9px;border-radius:99px;margin:2px 4px 2px 0}
+.asof{font-size:11px;opacity:.65}
+
+/* ===== A: dark terminal ===== */
+.va{background:#0d1117;color:#c9d1d9;font-family:"JetBrains Mono","Cascadia Code",Consolas,"Microsoft JhengHei",monospace;min-height:100vh}
+.va nav{position:sticky;top:46px;background:#0d1117ee;border-bottom:1px solid #21262d;padding:12px 0;z-index:5}
+.va nav .wrap{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
+.va nav a{text-decoration:none;color:#8b949e}.va nav a:hover{color:#3fb950}
+.va .hero{padding:72px 0 48px}
+.va .prompt{color:#3fb950;font-size:14px}
+.va h1{font-size:44px;color:#f0f6fc;margin:10px 0}
+.va .tag{font-size:18px;color:#58a6ff;max-width:640px;line-height:1.6}
+.va .btns{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+.va .btn{border:1px solid #3fb950;color:#3fb950;padding:8px 16px;border-radius:6px;text-decoration:none;font-size:14px}
+.va .btn:hover{background:#3fb95022}
+.va h2{color:#f0f6fc;font-size:22px;margin:56px 0 18px}.va h2::before{content:"## ";color:#3fb950}
+.va .card{border:1px solid #21262d;background:#161b22;border-radius:8px;padding:18px 20px;margin-bottom:14px;cursor:pointer;transition:.15s}
+.va .card:hover{border-color:#3fb950}
+.va .card h3{color:#f0f6fc;font-size:17px;display:flex;justify-content:space-between;gap:10px}
+.va .card .sub{color:#8b949e;font-size:13px;margin-top:4px}
+.va .card .det{display:none;margin-top:14px;font-size:14px;line-height:1.7}
+.va .card.open .det{display:block}
+.va .card.open h3 span.pm{transform:rotate(45deg)}
+.va .card ul{padding-left:18px}.va .card li{margin-bottom:6px}
+.va .chip{background:#1f6feb22;color:#58a6ff;border:1px solid #1f6feb55}
+.va .tl{border-left:2px solid #21262d;padding-left:20px}
+.va .tl .it{position:relative;margin-bottom:22px}
+.va .tl .it::before{content:"";position:absolute;left:-27px;top:6px;width:10px;height:10px;border-radius:50%;background:#3fb950}
+.va .tl .d{font-size:12px;color:#8b949e}.va .tl .o{color:#f0f6fc;font-size:16px}.va .tl .b{font-size:14px;margin-top:4px;line-height:1.6}
+.va footer{padding:48px 0;color:#8b949e;font-size:13px;border-top:1px solid #21262d;margin-top:48px}
+
+/* ===== B: light analytics ===== */
+.vb{background:#f6f8fb;color:#1b2430;font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;min-height:100vh}
+.vb nav{background:#fff;border-bottom:1px solid #e3e8ef;padding:14px 0;position:sticky;top:46px;z-index:5}
+.vb nav .wrap{display:flex;gap:24px;font-size:14px;align-items:center;flex-wrap:wrap}
+.vb nav b{margin-right:auto}.vb nav a{text-decoration:none;color:#5b6778}.vb nav a:hover{color:#0b6bcb}
+.vb .hero{padding:64px 0 28px}
+.vb h1{font-size:40px;letter-spacing:-.5px}
+.vb .tag{font-size:18px;color:#5b6778;margin-top:10px;max-width:640px;line-height:1.6}
+.vb .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:30px}
+.vb .tile{background:#fff;border:1px solid #e3e8ef;border-radius:12px;padding:16px 18px}
+.vb .tile b{font-size:30px;color:#0b6bcb;display:block}.vb .tile span{font-size:13px;color:#5b6778}
+.vb h2{font-size:24px;margin:52px 0 16px}
+.vb .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.vb .filters button{border:1px solid #cbd5e1;background:#fff;border-radius:99px;padding:6px 14px;cursor:pointer;font:inherit;font-size:13px;color:#334155}
+.vb .filters button.on{background:#0b6bcb;color:#fff;border-color:#0b6bcb}
+.vb .row{background:#fff;border:1px solid #e3e8ef;border-radius:12px;padding:16px 20px;margin-bottom:12px;display:grid;grid-template-columns:150px 1fr;gap:16px}
+.vb .row .d{font-size:13px;color:#64748b}.vb .row .o{font-weight:700}.vb .row .r{color:#475569;font-size:14px}.vb .row .b{font-size:14px;margin-top:6px;line-height:1.6}
+.vb .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:16px}
+.vb .pc{background:#fff;border:1px solid #e3e8ef;border-radius:14px;padding:20px}
+.vb .pc small{color:#0b6bcb;font-weight:700;letter-spacing:.5px;font-size:12px}
+.vb .pc h3{font-size:19px;margin:4px 0}.vb .pc p{font-size:14px;color:#475569;line-height:1.6;margin-bottom:12px}
+.vb .m{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.vb .m div{background:#eef5fd;border-radius:8px;padding:8px 12px;font-size:12px;color:#475569}.vb .m b{display:block;font-size:20px;color:#0b6bcb}
+.vb .chip{background:#f1f5f9;color:#475569}
+.vb .more{margin-top:14px;border:1px dashed #94a3b8;background:transparent;border-radius:10px;padding:10px 16px;cursor:pointer;font:inherit;color:#334155}
+.vb .morelist{display:none;margin-top:12px}.vb .morelist.show{display:block}
+.vb footer{padding:40px 0;color:#64748b;font-size:13px}
+@media(max-width:560px){.vb .row{grid-template-columns:1fr}.vb .grid{grid-template-columns:1fr}}
+
+/* ===== C: editorial split ===== */
+.vc{background:#f3ede2;color:#2b2118;font-family:"Noto Serif TC","PMingLiU",Georgia,serif;min-height:100vh}
+.vc .shell{display:grid;grid-template-columns:320px 1fr;max-width:1180px;margin:0 auto}
+.vc aside{padding:56px 32px;position:sticky;top:46px;align-self:start;height:calc(100vh - 46px);border-right:1px solid #d8cdb8}
+.vc aside h1{font-size:34px;line-height:1.2}
+.vc aside .tag{margin:16px 0;line-height:1.7;color:#5c4a38;font-size:15px}
+.vc aside a{display:block;margin:6px 0;color:#9a3b1b;font-size:14px}
+.vc aside .loc{font-size:12px;color:#8a7a66;margin-top:24px;font-family:system-ui,sans-serif}
+.vc main{padding:56px 40px}
+.vc h2{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#9a3b1b;margin:0 0 16px;font-family:system-ui,sans-serif}
+.vc .split{display:grid;grid-template-columns:240px 1fr;border:1px solid #d8cdb8;background:#faf6ee;margin-bottom:56px;min-height:360px}
+.vc .list button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #d8cdb8;background:transparent;padding:14px 16px;cursor:pointer;font:inherit;font-size:14px;color:#2b2118}
+.vc .list button.on{background:#2b2118;color:#faf6ee}
+.vc .detail{padding:24px 28px}
+.vc .detail h3{font-size:24px;margin-bottom:6px}.vc .detail .sub{color:#7a6a58;font-size:13px;font-family:system-ui,sans-serif}
+.vc .detail ul{margin:16px 0 0 18px;line-height:1.8;font-size:15px}
+.vc .big{display:flex;gap:28px;margin-top:20px;flex-wrap:wrap}
+.vc .big b{font-size:34px;color:#9a3b1b;display:block;line-height:1}.vc .big span{font-size:12px;color:#7a6a58;font-family:system-ui,sans-serif}
+.vc .chip{background:#efe5d2;color:#5c4a38;font-family:system-ui,sans-serif}
+.vc .bento{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:56px}
+.vc .bento div{background:#faf6ee;border:1px solid #d8cdb8;padding:16px}
+.vc .bento h4{font-size:12px;letter-spacing:2px;color:#9a3b1b;margin-bottom:8px;font-family:system-ui,sans-serif}
+.vc .bento p{font-size:13px;line-height:1.8;font-family:system-ui,sans-serif}
+.vc .yr{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px 0;border-top:1px solid #d8cdb8;font-size:15px}
+.vc .yr .d{font-family:system-ui,sans-serif;font-size:12px;color:#7a6a58;padding-top:3px}.vc .yr small{display:block;color:#7a6a58;font-family:system-ui,sans-serif;font-size:13px}
+@media(max-width:820px){.vc .shell{grid-template-columns:1fr}.vc aside{position:static;height:auto;border-right:0}.vc .split{grid-template-columns:1fr}.vc .bento{grid-template-columns:1fr}.vc main{padding:24px 20px}}
+</style>
+</head>
+<body>
+<div id="bar">
+  <button class="tab" data-v="A">A 深色終端</button>
+  <button class="tab" data-v="B">B 淺色數據</button>
+  <button class="tab" data-v="C">C 雜誌分欄</button>
+  <div class="note" id="note"></div>
+  <div class="lang"><button data-l="zh">中</button><button data-l="en">EN</button></div>
+</div>
+<div id="stage"></div>
+
+<script>
+const D = {
+  name:{zh:"林芳義",en:"Fang-Yi Lin"},
+  email:"az045317@gmail.com", gh:"github.com/yiyiscode",
+  role:{zh:"資料／AI 工程師",en:"Data / AI Engineer"},
+  tag:{zh:"把資料與 LLM 串成每天自動執行的系統。",en:"I turn data and LLMs into systems that run on their own, every day."},
+  ui:{
+    nav:{zh:["作品","經歷","技能","聯絡"],en:["Projects","Experience","Skills","Contact"]},
+    projects:{zh:"精選作品",en:"Featured projects"},
+    more:{zh:"更多專案",en:"More projects"},
+    exp:{zh:"經歷",en:"Experience"},
+    skills:{zh:"技能",en:"Skills"},
+    contact:{zh:"聯絡",en:"Contact"},
+    now:{zh:"至今",en:"Present"},
+    asof:{zh:"截至 2026-10-15",en:"as of 2026-10-15"},
+    github:{zh:"GitHub 原始碼",en:"Source on GitHub"},
+    soon:{zh:"連結待補",en:"Link coming soon"},
+    filt:{zh:["全部","工作","學歷","專案","獎項"],en:["All","Work","Education","Projects","Awards"]}
+  },
+  projects:[
+   {id:"jf",link:"github.com/yiyiscode/104-job-finder",
+    title:{zh:"104 職缺日報",en:"104 Job Finder"},
+    sub:{zh:"個人專案・獨立開發・2026/08 起",en:"Personal project · sole developer · since Aug 2026"},
+    metrics:[{v:"2,433",l:{zh:"不重複職缺（1,385 家公司）",en:"unique postings (1,385 companies)"},asof:1},{v:"~1h→4m",l:{zh:"每日人工篩選 → 全自動",en:"daily manual screening → automated"}},{v:"668",l:{zh:"離線自動化測試",en:"offline tests"},asof:1}],
+    bullets:[
+     {zh:"獨立開發每日 08:00 排程的職缺資料管線：擷取 → 去重 → 規則層過濾 → 兩階段 LLM 評分 → Telegram 推播",en:"Built a daily 08:00 pipeline: fetch → dedupe → rule filter → two-stage LLM scoring → Telegram push"},
+     {zh:"先量測再定門檻：同資料重跑深評雜訊約 ±8 分，將絕對門檻改為當日排名前 N 名並保留低標",en:"Measured before setting thresholds: ±8 re-scoring noise led to a daily top-N cut-off with a floor"},
+     {zh:"風險護欄：每次請求硬上限 40、遇封鎖訊號即熔斷，絕不登入帳號",en:"Guardrails: hard cap of 40 requests per run, circuit breaker on block signals, never logs in"},
+     {zh:"以 Claude Code 協作開發：111 個 commit 中 104 個由 AI 共同撰寫",en:"Built with Claude Code as a pair programmer: 104 of 111 commits co-authored with AI"}],
+    tech:["Python","SQLite","httpx","Pydantic","LLM API","Claude","Streamlit","Telegram Bot","pytest"]},
+   {id:"wf",link:null,
+    title:{zh:"半導體晶圓缺陷分類",en:"Semiconductor Wafer Defect Classification"},
+    sub:{zh:"自學專案・以 Codex 協作開發",en:"Self-directed project · built with Codex"},
+    metrics:[{v:"0.14%",l:{zh:"缺陷樣本比例（5,000 筆）",en:"defect rate (5,000 records)"}},{v:"100%→0%",l:{zh:"Holdout 漏判率 FNR",en:"holdout FNR"}},{v:"0.90",l:{zh:"20 次切分平均 Recall",en:"mean Recall, 20 splits"}}],
+    bullets:[
+     {zh:"處理 5,000 筆製程資料與 0.14% 極度不平衡樣本，以降低漏判為主要目標",en:"Modeled 5,000 records with 0.14% defect labels, optimizing to minimize missed detections"},
+     {zh:"評估指標由 Accuracy 轉向 Recall、FNR、F4 與 Average Precision",en:"Shifted evaluation from accuracy to Recall, FNR, F4 and Average Precision"},
+     {zh:"以 SHAP 辨識關鍵製程因子，並建置 BI Dashboard",en:"Identified key process factors with SHAP and built a BI dashboard"}],
+    tech:["Gradient Boosting","AutoML","SHAP","Scikit-learn","BI Dashboard"]},
+   {id:"rag",link:null,
+    title:{zh:"RAG 資安文件問答系統",en:"RAG Cybersecurity Document Q&A"},
+    sub:{zh:"FastAPI・地端部署",en:"FastAPI · on-premise"},
+    metrics:[],
+    bullets:[
+     {zh:"以 FastAPI 建置地端 RAG 系統，串接文件上傳、chunking、retrieval 與 grounded answer generation",en:"Built an on-premise RAG system with FastAPI: upload, chunking, retrieval, grounded answers"},
+     {zh:"防幻覺機制：僅依檢索片段回答，證據不足時回覆無法判斷，並附 file name、page、chunk id 引用",en:"Anti-hallucination: answers only from retrieved chunks, declines if evidence is thin, cites file, page, chunk id"},
+     {zh:"實作 SOC-style Web UI，含 retrieved evidence panel 與 citations",en:"SOC-style web UI with a retrieved-evidence panel and citations"}],
+    tech:["FastAPI","LangChain","ChromaDB","PyMuPDF","Pydantic"]},
+   {id:"th",link:null,
+    title:{zh:"兩階段羽球擊球動作分類（碩士論文）",en:"Two-Stage Badminton Stroke Classification (M.S. thesis)"},
+    sub:{zh:"臺科大・楊傳凱教授指導",en:"NTUST · advised by Prof. Chuan-Kai Yang"},
+    metrics:[{v:"89.70%",l:{zh:"第一階段準確率",en:"stage-1 accuracy"}},{v:"79.23%",l:{zh:"整體準確率",en:"overall accuracy"}},{v:"+12.05%",l:{zh:"較基準方法（10 組隨機種子）",en:"vs baseline (10 seeds)"}}],
+    bullets:[
+     {zh:"設計兩階段架構：先辨識正手／反手，再辨識細部擊球動作",en:"Two-stage design: forehand/backhand first, then stroke type"},
+     {zh:"以 AlphaPose 擷取骨架關鍵點並融合擊球軌跡",en:"Fused AlphaPose keypoints with shuttle trajectories"}],
+    tech:["PyTorch","LSTM","AlphaPose","TrackNetV3"]}
+  ],
+  more:[
+   {zh:"股價趨勢預測模型：XGBoost 90 天移動回測，準確率 80%",en:"Stock trend prediction: XGBoost 90-day rolling backtest, 80% accuracy"},
+   {zh:"大型語言模型與資訊安全：透過 Ollama 部署 Llama 2，並以 Transformers 微調",en:"Cybersecurity LLM: Llama 2 via Ollama, fine-tuned with Transformers"},
+   {zh:"i郵箱智慧設置點位 BI 平台：Streamlit + Folium 地理視覺化",en:"iBox site-selection BI platform: Streamlit + Folium geospatial"},
+   {zh:"網路爬蟲：BeautifulSoup4 與 Selenium，資料存入 MySQL",en:"Web scraping: BeautifulSoup4 and Selenium into MySQL"},
+   {zh:"R Shiny Dashboard：互動統計儀表板，部署至 R Shiny 雲端",en:"R Shiny Dashboard: interactive stats dashboard on the R Shiny cloud"}
+  ],
+  tl:[
+   {k:"proj",d:["2026-08",null],o:{zh:"104 職缺日報",en:"104 Job Finder"},r:{zh:"獨立開發（個人專案）",en:"Sole developer (personal project)"},b:{zh:"每日自動化職缺管線，兩階段 LLM 評分",en:"Daily automated job pipeline with two-stage LLM scoring"}},
+   {k:"work",d:["2025-02","2025-06"],o:{zh:"國泰人壽",en:"Cathay Life Insurance"},r:{zh:"資安大數據分析實習生（CAP 計畫）",en:"Big Data Analysis & Cybersecurity Intern (CAP)"},b:{zh:"重構訓練流程，效率提升 6 倍；BERT + CNN 惡意網址分類，準確率 99.84%",en:"Streamlined training pipeline for a 6x speedup; BERT + CNN malicious-URL classifier at 99.84% accuracy"}},
+   {k:"work",d:["2024-01","2024-12"],o:{zh:"臺北富邦銀行",en:"Taipei Fubon Bank"},r:{zh:"技術助理（產學合作案）",en:"Technical Assistant (industry-academia)"},b:{zh:"協助 AI 鷹眼識詐模型佈署、技術諮詢與教育訓練；以 LIME 開發模型解釋工具",en:"Assisted in deploying the AI Eagle Eye anti-fraud model with consulting and training; built LIME explainability tools"}},
+   {k:"award",d:["2024-01","2024-12"],o:{zh:"2024 郵政大數據競賽",en:"2024 Postal Big Data Competition"},r:{zh:"技術領導・佳作",en:"Technical Lead · Finalist"},b:{zh:"100+ 隊伍中前 15 名；i郵箱選址系統",en:"Top 15 of 100+ teams; iBox site-selection system"}},
+   {k:"work",d:["2024-02","2024-07"],o:{zh:"Solerie",en:"Solerie Co., Ltd."},r:{zh:"技術助理（AI 金幣瑕疵檢測）",en:"Technical Assistant (gold coin defect detection)"},b:{zh:"Arduino 介接硬體，整合 YOLO 偵測；SIFT + FLANN 量化瑕疵",en:"Arduino hardware setup with YOLO detection; SIFT + FLANN defect quantification"}},
+   {k:"edu",d:["2023-09","2025-06"],o:{zh:"國立臺灣科技大學",en:"NTUST"},r:{zh:"資訊管理系碩士",en:"M.S. in Management Information Systems"},b:{zh:"GPA 4.12/4.3",en:"GPA 4.12/4.3"}},
+   {k:"award",d:["2021-01","2021-12"],o:{zh:"2021 Data Station 企業數據競賽",en:"2021 Data Station Competition"},r:{zh:"組長・複賽入圍",en:"Team Lead · Semi-finalist"},b:{zh:"該題目前 5 名",en:"Top 5 in track"}},
+   {k:"edu",d:["2019-09","2022-06"],o:{zh:"國立臺北大學",en:"National Taipei University"},r:{zh:"統計學系學士",en:"B.S. in Statistics"},b:{zh:"GPA 3.79/4，系排名 9/61",en:"GPA 3.79/4, class rank 9/61"}}
+  ],
+  skills:[
+   {l:{zh:"程式語言",en:"Languages"},i:["Python","SQL","R","SAS","JavaScript"]},
+   {l:{zh:"統計／ML",en:"Statistics & ML"},i:["Scikit-learn","XGBoost","SHAP","LIME","PyCaret"]},
+   {l:{zh:"DL／LLM",en:"Deep Learning & LLM"},i:["PyTorch","LangChain","RAG","Ollama","Claude","ChromaDB"]},
+   {l:{zh:"資料工程",en:"Data Engineering"},i:["Pandas","SQLite","MySQL","PySpark","pytest"]},
+   {l:{zh:"後端／部署",en:"Backend & Cloud"},i:["FastAPI","Pydantic","AWS","Git"]},
+   {l:{zh:"BI／視覺化",en:"BI & Visualization"},i:["Power BI","Tableau","Streamlit","Plotly","R Shiny"]}
+  ],
+  ai:{zh:"AI 協作開發：Claude Code、Codex",en:"AI-assisted development: Claude Code, Codex"}
+};
+const NOTES={
+ A:{zh:"取捨：最像 mohan 的開發者風格、辨識度高；但長文閱讀較累，對非技術 HR 偏冷。互動：點專案卡片展開細節。",en:"Trade-off: closest to mohan's dev look and memorable, but harder for long reading and cold for non-technical HR. Click a card to expand."},
+ B:{zh:"取捨：最像 shaun 的數據分析風格、數字一眼可見、HR 友善；但視覺個性較一般。互動：Timeline 分類篩選、更多專案展開。",en:"Trade-off: closest to shaun's analytics look, numbers up front, HR-friendly, but less distinctive. Filter the timeline; expand more projects."},
+ C:{zh:"取捨：雜誌感、辨識度最高且適合閱讀；版面最特別，手機要改成上下排。互動：左側清單切換專案詳情。",en:"Trade-off: editorial feel, most distinctive and readable, but the layout is unusual and stacks on mobile. Pick a project from the list."}
+};
+const S={v:localStorage.getItem("dv")||"A",l:localStorage.getItem("dl")||(navigator.language.startsWith("zh")?"zh":"en"),open:{},filter:"all",pick:0,more:false};
+const t=o=>o[S.l];
+const fmt=p=>p[0]+" – "+(p[1]||t(D.ui.now));
+const chips=a=>a.map(x=>`<span class="chip">${x}</span>`).join("");
+const asof=m=>m.asof?` <span class="asof">(${t(D.ui.asof)})</span>`:"";
+
+function vA(){
+ const n=t(D.ui.nav);
+ return `<div class="va"><nav><div class="wrap"><a href="#a-p">${n[0]}</a><a href="#a-e">${n[1]}</a><a href="#a-s">${n[2]}</a><a href="#a-c">${n[3]}</a></div></nav>
+ <div class="wrap"><section class="hero"><div class="prompt">$ whoami</div><h1>${t(D.name)}</h1><div class="tag">${t(D.role)} — ${t(D.tag)}</div>
+ <div class="btns"><a class="btn" href="#a-p">${t(D.ui.projects)}</a><a class="btn" href="https://${D.gh}">GitHub</a><a class="btn" href="mailto:${D.email}">Email</a></div></section>
+ <h2 id="a-p">${t(D.ui.projects)}</h2>
+ ${D.projects.map(p=>`<div class="card ${S.open[p.id]?"open":""}" data-open="${p.id}"><h3>${t(p.title)}<span class="pm" style="transition:.15s">+</span></h3><div class="sub">${t(p.sub)}</div>
+  <div class="det">${p.metrics.length?`<p style="color:#3fb950">${p.metrics.map(m=>m.v+" "+t(m.l)+asof(m)).join(" · ")}</p>`:""}<ul>${p.bullets.map(b=>`<li>${t(b)}</li>`).join("")}</ul><div style="margin-top:10px">${chips(p.tech)}</div>
+  <div style="margin-top:10px;font-size:13px">${p.link?`<a href="https://${p.link}" style="color:#3fb950">→ ${t(D.ui.github)}</a>`:`<span style="color:#8b949e">${t(D.ui.soon)}</span>`}</div></div></div>`).join("")}
+ <h2>${t(D.ui.more)}</h2><ul style="padding-left:20px;line-height:1.9;font-size:14px">${D.more.map(m=>`<li>${t(m)}</li>`).join("")}</ul>
+ <h2 id="a-e">${t(D.ui.exp)}</h2><div class="tl">${D.tl.map(i=>`<div class="it"><div class="d">${fmt(i.d)}</div><div class="o">${t(i.o)} · ${t(i.r)}</div><div class="b">${t(i.b)}</div></div>`).join("")}</div>
+ <h2 id="a-s">${t(D.ui.skills)}</h2>${D.skills.map(s=>`<div style="margin-bottom:10px"><span style="color:#8b949e;font-size:13px">${t(s.l)}</span><br>${chips(s.i)}</div>`).join("")}<div style="font-size:13px;color:#8b949e">${t(D.ai)}</div>
+ <footer id="a-c">${D.email} · ${D.gh}</footer></div></div>`;
+}
+
+function vB(){
+ const n=t(D.ui.nav), f=t(D.ui.filt), keys=["all","work","edu","proj","award"];
+ const rows=D.tl.filter(i=>S.filter==="all"||i.k===S.filter);
+ return `<div class="vb"><nav><div class="wrap"><b>${t(D.name)}</b><a href="#b-p">${n[0]}</a><a href="#b-e">${n[1]}</a><a href="#b-s">${n[2]}</a><a href="#b-c">${n[3]}</a></div></nav>
+ <div class="wrap"><section class="hero"><h1>${t(D.role)}</h1><div class="tag">${t(D.tag)}</div>
+ <div class="tiles"><div class="tile"><b>2,433</b><span>${S.l==="zh"?"不重複職缺已處理":"unique postings processed"} <span class="asof">(${t(D.ui.asof)})</span></span></div>
+ <div class="tile"><b>6x</b><span>${S.l==="zh"?"實習中訓練效率提升":"training speedup during internship"}</span></div>
+ <div class="tile"><b>99.84%</b><span>${S.l==="zh"?"惡意網址分類準確率":"malicious-URL classifier accuracy"}</span></div>
+ <div class="tile"><b>Top 15</b><span>${S.l==="zh"?"2024 郵政大數據競賽（100+ 隊）":"2024 Postal Big Data (100+ teams)"}</span></div></div></section>
+ <h2 id="b-p">${t(D.ui.projects)}</h2><div class="grid">${D.projects.map(p=>`<div class="pc"><small>${p.id==="jf"?"AUTOMATION · LLM":p.id==="wf"?"MACHINE LEARNING":p.id==="rag"?"LLM · RAG":"DEEP LEARNING"}</small><h3>${t(p.title)}</h3><p>${t(p.sub)}</p>
+  ${p.metrics.length?`<div class="m">${p.metrics.map(m=>`<div><b>${m.v}</b>${t(m.l)}${asof(m)}</div>`).join("")}</div>`:`<p>${t(p.bullets[1])}</p>`}
+  <div>${chips(p.tech)}</div><p style="margin:12px 0 0;font-size:13px">${p.link?`<a href="https://${p.link}" style="color:#0b6bcb">${t(D.ui.github)} →</a>`:`<span style="color:#94a3b8">${t(D.ui.soon)}</span>`}</p></div>`).join("")}</div>
+ <button class="more" data-more="1">${S.more?"− ":"+ "}${t(D.ui.more)} (5)</button><div class="morelist ${S.more?"show":""}">${D.more.map(m=>`<div class="row" style="grid-template-columns:1fr">${t(m)}</div>`).join("")}</div>
+ <h2 id="b-e">${t(D.ui.exp)}</h2><div class="filters">${keys.map((k,i)=>`<button data-f="${k}" class="${S.filter===k?"on":""}">${f[i]}</button>`).join("")}</div>
+ ${rows.map(i=>`<div class="row"><div class="d">${fmt(i.d)}</div><div><div class="o">${t(i.o)}</div><div class="r">${t(i.r)}</div><div class="b">${t(i.b)}</div></div></div>`).join("")}
+ <h2 id="b-s">${t(D.ui.skills)}</h2>${D.skills.map(s=>`<div style="margin-bottom:10px"><b style="font-size:13px;color:#64748b">${t(s.l)}</b><br>${chips(s.i)}</div>`).join("")}
+ <footer id="b-c">${D.email} · ${D.gh}</footer></div></div>`;
+}
+
+function vC(){
+ const p=D.projects[S.pick];
+ return `<div class="vc"><div class="shell"><aside><h1>${t(D.name)}</h1><div class="tag"><b>${t(D.role)}</b><br>${t(D.tag)}</div>
+ <a href="mailto:${D.email}">${D.email}</a><a href="https://${D.gh}">${D.gh}</a></aside>
+ <main><h2>${t(D.ui.projects)}</h2><div class="split"><div class="list">${D.projects.map((q,i)=>`<button data-pick="${i}" class="${S.pick===i?"on":""}">${t(q.title)}</button>`).join("")}</div>
+  <div class="detail"><h3>${t(p.title)}</h3><div class="sub">${t(p.sub)}</div>
+  ${p.metrics.length?`<div class="big">${p.metrics.map(m=>`<div><b>${m.v}</b><span>${t(m.l)}${m.asof?" · "+t(D.ui.asof):""}</span></div>`).join("")}</div>`:""}
+  <ul>${p.bullets.map(b=>`<li>${t(b)}</li>`).join("")}</ul><div style="margin-top:16px">${chips(p.tech)}</div>
+  <p style="margin-top:14px;font-size:13px;font-family:system-ui">${p.link?`<a href="https://${p.link}" style="color:#9a3b1b">${t(D.ui.github)} →</a>`:`<span style="color:#8a7a66">${t(D.ui.soon)}</span>`}</p></div></div>
+ <h2>${t(D.ui.skills)}</h2><div class="bento">${D.skills.map(s=>`<div><h4>${t(s.l)}</h4><p>${s.i.join(" · ")}</p></div>`).join("")}</div>
+ <h2>${t(D.ui.exp)}</h2>${D.tl.map(i=>`<div class="yr"><div class="d">${fmt(i.d)}</div><div>${t(i.o)}<small>${t(i.r)} — ${t(i.b)}</small></div></div>`).join("")}
+ <h2 style="margin-top:48px">${t(D.ui.more)}</h2>${D.more.map(m=>`<div class="yr" style="grid-template-columns:1fr">${t(m)}</div>`).join("")}</main></div></div>`;
+}
+
+function render(){
+ const y=window.scrollY;
+ document.documentElement.lang=S.l==="zh"?"zh-Hant":"en";
+ document.querySelectorAll("#bar .tab").forEach(b=>b.classList.toggle("on",b.dataset.v===S.v));
+ document.querySelectorAll("#bar .lang button").forEach(b=>b.classList.toggle("on",b.dataset.l===S.l));
+ document.getElementById("note").textContent=t(NOTES[S.v]);
+ document.getElementById("stage").innerHTML={A:vA,B:vB,C:vC}[S.v]();
+ window.scrollTo(0,y);
+}
+document.addEventListener("click",e=>{
+ const g=(k)=>e.target.closest(`[data-${k}]`);
+ let x;
+ if(x=g("v")){S.v=x.dataset.v;localStorage.setItem("dv",S.v);window.scrollTo(0,0)}
+ else if(x=g("l")){S.l=x.dataset.l;localStorage.setItem("dl",S.l)}
+ else if(x=g("open")){S.open[x.dataset.open]=!S.open[x.dataset.open]}
+ else if(x=g("f")){S.filter=x.dataset.f}
+ else if(x=g("pick")){S.pick=+x.dataset.pick}
+ else if(g("more")){S.more=!S.more}
+ else return;
+ render();
+});
+render();
+</script>
+</body>
+</html>

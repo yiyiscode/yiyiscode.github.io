@@ -1,0 +1,9 @@
+# 內部文件：含經歷庫的內部路徑、規則與工作筆記，不公開
+handoff.md
+CLAUDE.local.md
+RESUME.md
+docs/
+
+*.log
+.DS_Store
+Thumbs.db
