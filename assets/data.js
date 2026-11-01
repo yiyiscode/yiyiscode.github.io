@@ -46,7 +46,7 @@ window.SITE = {
     skillsTitle: { zh: "技能", en: "Skills" },
     certTitle: { zh: "證照與語言", en: "Certifications & Language" },
     contactTitle: { zh: "聯絡我", en: "Get in touch" },
-    contactSub: { zh: "歡迎來信討論資料／AI 相關的職缺。", en: "Open to data and AI engineering opportunities." },
+    contactSub: { zh: "歡迎來信討論資料／AI 工程師相關的職缺。", en: "Open to data and AI engineering opportunities." },
     present: { zh: "至今", en: "Present" },
     asof: { zh: "截至 2026-10-15", en: "as of 2026-10-15" },
     github: { zh: "GitHub 原始碼", en: "Source on GitHub" },
