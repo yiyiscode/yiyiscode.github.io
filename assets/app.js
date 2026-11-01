@@ -100,7 +100,7 @@
       <h2 class="proj-title grad">${t(D.ui.projTitle)}</h2><p class="proj-sub">${t(D.ui.projSub)}</p></div>
       <div class="panel">${D.projects.map(card).join("")}
         <div class="more-h mono">${t(D.ui.moreTitle).toUpperCase()}</div>
-        <div class="more-grid">${D.more.map((m) => `<div class="card glow reveal"><h3>${esc(t(m.title))}</h3><p>${esc(t(m.desc))}</p><div class="tags">${chips(m.tech)}</div>${shots(m.img, 3)}</div>`).join("")}</div>
+        <div class="more-grid">${D.more.map((m) => `<div class="card glow reveal"><h3>${esc(t(m.title))}</h3><p>${esc(t(m.desc))}</p><div class="tags">${chips(m.tech)}</div>${shots(m.img, 1)}</div>`).join("")}</div>
       </div></section>`;
   }
 

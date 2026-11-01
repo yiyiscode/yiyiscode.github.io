@@ -168,6 +168,7 @@ section { padding: 72px 0 24px; }
 .more-h { font-size: 16px; letter-spacing: .14em; color: var(--soft); margin: 26px 6px 12px; }
 .more-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px; }
 .more-grid .card h3 { font-size: 19px; }
+.more-grid .shot img { height: 150px; }
 .more-grid .card p { font-size: 18px; color: var(--muted); margin-top: 6px; }
 
 .cert-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
