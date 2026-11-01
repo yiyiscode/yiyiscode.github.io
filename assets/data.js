@@ -201,7 +201,9 @@ window.SITE = {
         { zh: "設計兩階段 LLM 評分（每批 15 筆粗篩 → 逐筆深評，structured outputs）；模型只做判斷，總分與取捨由程式計算與校正。", en: "Designed two-stage LLM scoring (batched screening of 15 → per-job deep scoring with structured outputs); the model only judges, totals and cut-offs are computed in code." },
         { zh: "先量測再定門檻：同資料重跑深評雜訊約 ±8 分，將絕對門檻改為當日排名前 N 名並保留低標。", en: "Measured before setting thresholds: re-scoring showed ±8 noise, so switched from an absolute cut-off to daily top-N with a floor." },
         { zh: "建立風險控管護欄：每次請求數硬上限 40、平均約 29 次；遇封鎖訊號即停止並熔斷，絕不登入帳號。", en: "Built guardrails: hard cap of 40 requests per run (avg ~29); stop and trip a circuit breaker on any block signal; never logs in." },
-        { zh: "累計處理 2,433 筆不重複職缺（1,385 家公司），深評 699 筆、只推薦 196 筆（約 8%）。", en: "Processed 2,433 unique postings from 1,385 companies; 699 deep-scored, only 196 (~8%) recommended.", asof: true },
+        { zh: "累計處理 2,433 筆不重複職缺（1,385 家公司、38 次執行）；新上架 2,452 筆，規則層濾除 67%，深評 699 筆，只推薦 196 筆（約 8%）。", en: "Processed 2,433 unique postings from 1,385 companies over 38 runs; of 2,452 new postings, the rule layer filtered out 67%, 699 were deep-scored and only 196 (~8%) recommended.", asof: true },
+        { zh: "將評分模型由 Gemini 遷移至 Claude，失敗時自動退回原供應商，並重評 408 筆歷史職缺重新校準門檻。", en: "Migrated scoring from Gemini to Claude with automatic fallback, re-scoring 408 historical postings to recalibrate thresholds." },
+        { zh: "建立 668 個離線自動化測試，以錄下的真實回應驗證抓取與解析；OpenRouter API 全期實付僅 US$1.28。", en: "Wrote 668 offline automated tests using recorded real responses; total OpenRouter API spend to date is only US$1.28.", asof: true },
         { zh: "以 Claude Code 協作開發：111 個 commit 中 104 個由 AI 共同撰寫。", en: "Built with Claude Code as an AI pair programmer: 104 of 111 commits co-authored with AI.", asof: true }
       ],
       tech: ["Python", "SQLite", "httpx", "Pydantic", "LLM API", "Claude", "Claude Code", "Streamlit", "Telegram Bot", "pytest"]
