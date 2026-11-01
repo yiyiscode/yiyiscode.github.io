@@ -129,9 +129,44 @@
     });
   }
 
+  // 燈箱：點縮圖在站內看完整圖（長圖可上下捲）；←/→ 切換同一張卡片的圖，Esc 或點背景關閉
+  let lb = null, lbList = [], lbIdx = 0;
+  const lbShow = (i) => {
+    lbIdx = (i + lbList.length) % lbList.length;
+    const a = lbList[lbIdx], im = a.querySelector("img"), box = lb.querySelector("img");
+    box.src = a.href; box.alt = im.alt;
+    lb.querySelector(".lb-cap").textContent = `${lbIdx + 1} / ${lbList.length}　${im.alt}`;
+    lb.querySelector(".lb-body").scrollTop = 0;
+  };
+  const lbClose = () => { if (lb) { lb.remove(); lb = null; document.body.style.overflow = ""; } };
+  const lbOpen = (a) => {
+    lbList = [...a.closest(".shots").querySelectorAll(".shot a")];
+    lb = document.createElement("div");
+    lb.className = "lb"; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true");
+    lb.innerHTML = `<button class="lb-x" data-lb="close" aria-label="Close">✕</button>`
+      + (lbList.length > 1 ? `<button class="lb-nav lb-prev" data-lb="prev" aria-label="Previous">‹</button><button class="lb-nav lb-next" data-lb="next" aria-label="Next">›</button>` : "")
+      + `<div class="lb-body" data-lb="bg"><img alt=""></div><div class="lb-cap"></div>`;
+    document.body.appendChild(lb); document.body.style.overflow = "hidden";
+    lbShow(lbList.indexOf(a)); lb.querySelector(".lb-x").focus();
+  };
+  document.addEventListener("keydown", (e) => {
+    if (!lb) return;
+    if (e.key === "Escape") lbClose();
+    else if (e.key === "ArrowLeft") lbShow(lbIdx - 1);
+    else if (e.key === "ArrowRight") lbShow(lbIdx + 1);
+  });
+
   document.addEventListener("click", (e) => {
     const q = (s) => e.target.closest(s);
     let x;
+    if ((x = q(".shot a"))) { e.preventDefault(); lbOpen(x); return; }
+    if ((x = q("[data-lb]"))) {
+      const k = x.dataset.lb;
+      if (k === "close" || (k === "bg" && e.target === x)) lbClose();
+      else if (k === "prev") lbShow(lbIdx - 1);
+      else if (k === "next") lbShow(lbIdx + 1);
+      return;
+    }
     if ((x = q("[data-lang]"))) { S.lang = x.dataset.lang; store.set("lang", S.lang); }
     else if ((x = q("[data-filter]"))) { S.filter = x.dataset.filter; }
     else if (q("[data-more]")) { S.more = !S.more; }
