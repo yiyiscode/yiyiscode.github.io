@@ -90,7 +90,7 @@
     return `<section id="projects"><div class="sec-head reveal"><span class="pill">${t(D.ui.projBadge)}</span><h2>${t(D.ui.projTitle)}</h2><p>${t(D.ui.projSub)}</p></div>
       <div class="proj-grid">${D.projects.map(card).join("")}</div>
       <button class="more-toggle" data-more aria-expanded="${S.more}">${S.more ? "− " + t(D.ui.hideMore) : "+ " + t(D.ui.showMore) + " (" + D.more.length + ")"}</button>
-      <div class="more-grid ${S.more ? "show" : ""}">${D.more.map((m) => `<div class="card"><h3>${esc(t(m.title))}</h3><p>${esc(t(m.desc))}</p><div class="tags">${chips(m.tech)}</div></div>`).join("")}</div></section>`;
+      <div class="more-grid ${S.more ? "show" : ""}">${D.more.map((m) => `<div class="card"><h3>${esc(t(m.title))}</h3><p>${esc(t(m.desc))}</p><div class="tags">${chips(m.tech)}</div>${shots(m.img)}</div>`).join("")}</div></section>`;
   }
 
   function contact() {

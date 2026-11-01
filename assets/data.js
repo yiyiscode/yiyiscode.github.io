@@ -185,7 +185,8 @@ window.SITE = {
       link: "https://github.com/yiyiscode/104-job-finder",
       img: [
         { src: "assets/img/jobfinder-arch.png", zh: "104 職缺日報每日資料管線架構圖", en: "104 Job Finder daily pipeline architecture" },
-        { src: "assets/img/jobfinder-tailor.png", zh: "履歷修改建議畫面（公司與職缺名稱已隱藏）", en: "Resume-tailoring view (company and job title hidden)" }
+        { src: "assets/img/jobfinder-tailor.png", zh: "履歷修改建議畫面（公司與職缺名稱已隱藏）", en: "Resume-tailoring view (company and job title hidden)" },
+        { src: "assets/img/jobfinder-trends.png", zh: "技能趨勢分析（標示樣本數與偏誤）", en: "Skill trend analysis (sample sizes and biases labelled)" }
       ],
       metrics: [
         { v: "2,433", asof: true, zh: "不重複職缺（1,385 家公司）", en: "unique postings (1,385 companies)" },
@@ -210,7 +211,11 @@ window.SITE = {
       title: { zh: "半導體晶圓缺陷分類", en: "Semiconductor Wafer Defect Classification" },
       sub: { zh: "自學專案・以 Codex 協作開發", en: "Self-directed project · built with Codex" },
       link: null,
-      img: { src: "assets/img/wafer-shap.png", zh: "SHAP 特徵重要性：pressure、temperature、etch rate", en: "SHAP feature importance: pressure, temperature, etch rate" },
+      img: [
+        { src: "assets/img/wafer-dashboard.png", zh: "BI Dashboard：預測表現、特徵重要性與異常排名", en: "BI dashboard: prediction quality, feature importance and anomaly ranking" },
+        { src: "assets/img/wafer-dashboard-2.png", zh: "BI Dashboard：混淆矩陣、模型比較與異常晶圓表", en: "BI dashboard: confusion matrix, model comparison and anomaly wafer table" },
+        { src: "assets/img/wafer-shap.png", zh: "SHAP 特徵重要性：pressure、temperature、etch rate", en: "SHAP feature importance: pressure, temperature, etch rate" }
+      ],
       metrics: [
         { v: "0.14%", zh: "缺陷樣本比例（5,000 筆製程資料）", en: "defect rate (5,000 process records)" },
         { v: "100% → 0%", zh: "Holdout Test 漏判率 FNR", en: "holdout-test FNR" },
@@ -233,7 +238,11 @@ window.SITE = {
       title: { zh: "RAG 資安文件問答系統", en: "RAG Cybersecurity Document Q&A System" },
       sub: { zh: "FastAPI・地端部署", en: "FastAPI · on-premise" },
       link: null,
-      img: { src: "assets/img/rag-ui.png", zh: "SOC-style RAG 介面：回答附引用與檢索證據面板", en: "SOC-style RAG UI: answers with citations and a retrieved-evidence panel" },
+      img: [
+        { src: "assets/img/rag-ui.png", zh: "SOC-style RAG 介面：回答附引用與檢索證據面板", en: "SOC-style RAG UI: answers with citations and a retrieved-evidence panel" },
+        { src: "assets/img/rag-soc-console.png", zh: "SOC 資安 RAG 分析平台", en: "SOC cybersecurity RAG analysis console" },
+        { src: "assets/img/rag-architecture.png", zh: "RAG 開發架構", en: "RAG development architecture" }
+      ],
       metrics: [],
       flow: {
         zh: ["文件上傳", "Chunking", "Retrieval", "Grounded 回答＋引用"],
@@ -252,7 +261,11 @@ window.SITE = {
       title: { zh: "兩階段羽球擊球動作分類（碩士論文）", en: "Two-Stage Badminton Stroke Classification (M.S. thesis)" },
       sub: { zh: "臺灣科技大學・楊傳凱教授指導", en: "NTUST · advised by Prof. Chuan-Kai Yang" },
       link: null,
-      img: { src: "assets/img/thesis-model-result.png", zh: "模型準確率比較：單一模型與兩階段模型（10 組隨機種子）", en: "Accuracy comparison: single model vs. two-stage model (10 random seeds)" },
+      img: [
+        { src: "assets/img/thesis-demo.png", zh: "系統示意：骨架關鍵點與擊球軌跡", en: "System illustration: skeleton keypoints and shuttle trajectory" },
+        { src: "assets/img/thesis-two-stage.png", zh: "兩階段模型架構", en: "Two-stage model architecture" },
+        { src: "assets/img/thesis-model-result.png", zh: "模型準確率比較：單一模型與兩階段模型（10 組隨機種子）", en: "Accuracy comparison: single model vs. two-stage model (10 random seeds)" }
+      ],
       metrics: [
         { v: "89.70%", zh: "第一階段準確率", en: "stage-1 accuracy" },
         { v: "79.23%", zh: "整體準確率", en: "overall accuracy" },
@@ -278,12 +291,20 @@ window.SITE = {
     {
       title: { zh: "大型語言模型與資訊安全", en: "Cybersecurity LLM (GAI Focus)" },
       desc: { zh: "透過 Ollama 部署 Llama 2，以 Prompt Engineering 與 LangChain 建構規則導向資安助理；微調 4 個 Epoch，Validation Loss 由 2.50 降至 2.44、Perplexity 11.56（林俊叡副教授指導）。", en: "Deployed Llama 2 via Ollama with Prompt Engineering and LangChain; fine-tuned for 4 epochs, validation loss 2.50 → 2.44, perplexity 11.56 (advised by Assoc. Prof. Raymund Lin)." },
-      tech: ["Ollama", "Llama 2", "LangChain", "Transformers"]
+      tech: ["Ollama", "Llama 2", "LangChain", "Transformers"],
+      img: [
+        { src: "assets/img/llm-prompt-engineering.png", zh: "提示工程與回應架構", en: "Prompt engineering and response architecture" },
+        { src: "assets/img/llm-fine-tuning.png", zh: "微調訓練結果：4 個 Epoch、Perplexity 11.56", en: "Fine-tuning result: 4 epochs, perplexity 11.56" }
+      ]
     },
     {
       title: { zh: "i郵箱智慧設置點位 BI 平台", en: "iBox Site Selection BI Platform" },
       desc: { zh: "Streamlit + Folium 地理視覺化，整合 i郵箱使用數據、地理資訊與台北捷運人流，比較 4 種設置地點類型。", en: "Streamlit + Folium geospatial platform combining iBox usage, geographic data and Taipei Metro ridership across 4 site types." },
-      tech: ["Streamlit", "Folium", "PyCaret", "AWS"]
+      tech: ["Streamlit", "Folium", "PyCaret", "AWS"],
+      img: [
+        { src: "assets/img/ibox-dashboard.png", zh: "熱點分析圖：地理視覺化與使用說明", en: "Hotspot analysis map with geospatial view" },
+        { src: "assets/img/ibox-metro-flow.png", zh: "台北捷運人流分析", en: "Taipei Metro ridership analysis" }
+      ]
     },
     {
       title: { zh: "網路爬蟲", en: "Web Scraping" },
