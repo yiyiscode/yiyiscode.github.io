@@ -28,7 +28,6 @@ Portfolio: [yiyiscode.github.io](https://yiyiscode.github.io) · Email: [az04531
 
 - **Cathay Life Insurance**, Big Data Analysis & Cybersecurity Intern (CAP Program), Feb–Jun 2025: 6x training efficiency from a streamlined PyTorch pipeline; BERT + CNN malicious-URL classifier at 99.84% accuracy.
 - **Taipei Fubon Bank**, Technical Assistant (industry-academia collaboration), 2024: assisted deploying an anti-fraud model to multiple banks, with technical consultation and training; built LIME explainability tools.
-- **Solerie Co., Ltd.**, Technical Assistant, Feb–Jul 2024: end-to-end gold coin defect inspection with Arduino, YOLO, SIFT + FLANN.
 - **Education:** M.S. in Management Information Systems, NTUST (2023–2025); B.S. in Statistics, National Taipei University (2019–2022).
 
 ## Tech
