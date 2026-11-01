@@ -159,7 +159,7 @@ section { padding: 72px 0 24px; }
 /* contact + footer */
 .contact { text-align: center; }
 .contact .row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 24px; }
-footer.foot { margin-top: 72px; padding: 28px 0 40px; border-top: 1px solid var(--border); text-align: center; font-size: 16px; color: var(--soft); }
+main.wrap { padding-bottom: 72px; }
 
 /* reveal */
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }

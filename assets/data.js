@@ -55,7 +55,6 @@ window.SITE = {
       zh: "AI 協作開發：以 Claude Code、Codex 協作開發部分專案。",
       en: "AI-assisted development: some projects built with Claude Code and Codex."
     },
-    footer: { zh: "以純 HTML／CSS／JS 手寫，部署於 GitHub Pages。", en: "Hand-written HTML/CSS/JS, hosted on GitHub Pages." }
   },
   metrics: [
     { v: "2,433", asof: true, zh: "不重複職缺已處理（104 職缺日報）", en: "unique postings processed (104 Job Finder)" },

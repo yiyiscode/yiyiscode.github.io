@@ -110,7 +110,7 @@
     document.title = t(D.titles);
     if (S.theme) document.documentElement.dataset.theme = S.theme;
     document.getElementById("app").innerHTML =
-      header() + `<main class="wrap">${hero()}${timeline()}${projects()}${stack()}${contact()}</main><footer class="foot">${t(D.ui.footer)}</footer>`;
+      header() + `<main class="wrap">${hero()}${timeline()}${projects()}${stack()}${contact()}</main>`;
     window.scrollTo(0, y);
     observe();
   }

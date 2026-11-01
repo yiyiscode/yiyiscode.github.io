@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>作品區版面方案 Demo（參考動態網站）</title>
+<style>
+:root{--bg:#f8fafc;--fg:#0f172a;--muted:#475569;--soft:#64748b;--panel:#f8fafc;--card:#fff;--border:#e2e8f0;--chip:#f1f5f9;--accent:#0891b2;--blue:#2563eb;--shadow:0 10px 24px rgba(8,12,24,.06),0 2px 6px rgba(8,12,24,.04);--glow:rgba(8,145,178,.14)}
+:root[data-theme=dark]{--bg:#020617;--fg:#f1f5f9;--muted:#cbd5e1;--soft:#94a3b8;--panel:rgba(2,6,23,.9);--card:rgba(2,6,23,.8);--border:rgba(255,255,255,.1);--chip:rgba(255,255,255,.05);--accent:#22d3ee;--blue:#60a5fa;--shadow:0 10px 30px rgba(0,0,0,.5);--glow:rgba(34,211,238,.2)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Geist","Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--fg);line-height:1.7;font-size:17px}
+.mono{font-family:"Geist Mono",Consolas,monospace}
+#bar{position:sticky;top:0;z-index:50;background:#1c1c1e;color:#eee;display:flex;gap:10px;align-items:center;padding:8px 16px;flex-wrap:wrap;border-bottom:1px solid #333}
+#bar button{border:1px solid #444;background:#2a2a2d;color:#ddd;padding:6px 14px;border-radius:6px;cursor:pointer;font:inherit;font-size:14px}
+#bar button.on{background:#f5c542;color:#111;border-color:#f5c542;font-weight:700}
+#bar .note{flex:1;min-width:240px;font-size:13px;color:#aaa}
+.wrap{max-width:1152px;margin:0 auto;padding:36px 24px 80px}
+.hdr{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;opacity:.85;margin-bottom:8px}
+.hdr b{color:var(--blue);letter-spacing:.14em;font-size:15px;font-weight:500}.hdr i{font-style:normal;color:var(--soft)}.hdr span{color:var(--soft);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+h2.t{font-size:clamp(30px,4vw,42px);font-weight:800;margin-bottom:20px}
+.grad{background:linear-gradient(90deg,#2563eb,#0891b2,#0d9488);-webkit-background-clip:text;background-clip:text;color:transparent}
+:root[data-theme=dark] .grad{background-image:linear-gradient(90deg,#60a5fa,#22d3ee,#2dd4bf)}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;box-shadow:0 20px 50px rgba(8,12,24,.12);padding:14px}
+.glow{position:relative;overflow:hidden;border-radius:12px;border:1px solid var(--border);background:var(--card);box-shadow:var(--shadow);transition:.3s;--mx:50%;--my:50%}
+.glow::before{content:"";position:absolute;inset:-1px;opacity:0;pointer-events:none;transition:opacity .3s;background:radial-gradient(350px circle at var(--mx) var(--my),var(--glow),transparent 70%)}
+.glow:hover{border-color:rgba(100,116,139,.5);transform:translateY(-2px)}.glow:hover::before{opacity:1}
+.glow>*{position:relative}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{padding:20px}
+.cat{font-size:13px;letter-spacing:.16em;color:var(--accent)}
+.card h4{font-size:24px;font-weight:700;margin-top:2px;line-height:1.3}.sub{font-size:15px;color:var(--soft);margin-bottom:12px}
+.metrics{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:12px}.metrics .v{font-size:24px;font-weight:700;color:var(--blue)}:root[data-theme=dark] .metrics .v{color:var(--accent)}.metrics .l{font-size:13px;color:var(--soft);max-width:11rem;line-height:1.4}
+.boxes{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}.boxes div{flex:1 1 130px;background:rgba(8,145,178,.1);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}.boxes b{display:block;font-size:22px;color:var(--accent)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:13px;color:var(--soft);margin-bottom:12px}.flow s{text-decoration:none;color:var(--accent)}.flow span{border:1px solid var(--border);border-radius:5px;padding:0 7px}
+ul{padding-left:1.1em;color:var(--muted);font-size:15px}li+li{margin-top:6px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.tags span{font-size:13px;color:var(--soft);border:1px solid var(--border);background:var(--chip);border-radius:5px;padding:0 8px}
+.shots{display:grid;gap:12px;margin-top:14px}.shot{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff}.shot img{display:block;width:100%;height:220px;object-fit:cover;object-position:top}.shot p{padding:6px 10px;font-size:13px;color:var(--soft);background:var(--card);border-top:1px solid var(--border)}
+.link{display:inline-block;margin-top:12px;font-size:14px;color:var(--blue);text-decoration:none}.link:hover{text-decoration:underline}
+.more-h{font-size:14px;letter-spacing:.14em;color:var(--soft);margin:22px 4px 10px}
+.more .card{padding:16px}.more h5{font-size:17px;font-weight:700}.more p{font-size:14px;color:var(--muted);margin-top:6px}
+.toggle{display:block;margin:18px auto 0;border:1px dashed var(--soft);background:transparent;color:var(--muted);border-radius:10px;padding:8px 20px;cursor:pointer;font:inherit;font-size:14px}
+/* C：寬卡片 */
+.wide{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;padding:22px}.wide+.wide{margin-top:12px}
+.wide .shots{margin-top:0;align-content:start}
+@media(max-width:860px){.grid2,.grid3,.wide{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="bar">
+  <button data-v="A">A 完整移植</button><button data-v="B">B 混合（保留色塊＋折疊）</button><button data-v="C">C 寬卡片（圖文並排）</button>
+  <div class="note" id="note"></div>
+  <button data-th>深／淺色</button><button data-lang>中／EN</button>
+</div>
+<div class="wrap" id="stage"></div>
+<script src="../assets/data.js"></script>
+<script>
+const D=window.SITE;
+const S={v:"A",lang:"zh",more:false,dark:false};
+const t=o=>o[S.lang];const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const asof=()=>` <span class="mono" style="color:var(--accent);font-size:12px">(${S.lang==="zh"?"截至 2026-10-15":"as of 2026-10-15"})</span>`;
+const nm=s=>s.replace(/^.*\//,"").replace(/\.\w+$/,"");
+const tags=a=>`<div class="tags mono">${a.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`;
+const shots=img=>img?`<div class="shots">${[].concat(img).map(m=>`<figure class="shot"><a href="../assets/img/full/${nm(m.src)}.webp" target="_blank"><img src="../assets/img/thumb/${nm(m.src)}.webp" alt=""></a><p>${esc(t(m))}</p></figure>`).join("")}</div>`:"";
+const flow=p=>`<div class="flow mono">${p.flow[S.lang].map((s,i)=>(i?"<s>→</s>":"")+`<span>${esc(s)}</span>`).join("")}</div>`;
+const bullets=p=>`<ul>${p.bullets.map(b=>`<li>${esc(t(b))}${b.asof?asof():""}</li>`).join("")}</ul>`;
+const link=p=>p.link?`<a class="link mono" href="${p.link}" target="_blank">${t(D.ui.github)} ↗</a>`:"";
+const metricsPlain=p=>p.metrics.length?`<div class="metrics">${p.metrics.map(m=>`<div><div class="v mono">${m.v}</div><div class="l">${esc(t(m))}${m.asof?asof():""}</div></div>`).join("")}</div>`:"";
+const metricsBox=p=>p.metrics.length?`<div class="boxes">${p.metrics.map(m=>`<div><b class="mono">${m.v}</b>${esc(t(m))}${m.asof?asof():""}</div>`).join("")}</div>`:"";
+const head=()=>`<div class="hdr mono"><b>04</b><i>//</i><span>${S.lang==="zh"?"精選作品與資料專案":"FEATURED WORK"}</span></div><h2 class="t"><span class="grad">${t(D.ui.projTitle)}</span></h2>`;
+const moreCards=()=>`<div class="more-h mono">${t(D.ui.moreTitle).toUpperCase()}</div><div class="grid3 more">${D.more.map(x=>`<div class="glow card"><h5>${esc(t(x.title))}</h5><p>${esc(t(x.desc))}</p>${tags(x.tech)}</div>`).join("")}</div>`;
+const NOTES={
+ A:{zh:"取捨：最貼近動態版（面板、聚光卡片、等寬標籤、無底色大數字、更多專案常駐三欄）；頁面最長。",en:"Trade-off: closest to the dynamic site; longest page."},
+ B:{zh:"取捨：動態版的卡片與標題風格，保留靜態版的數字色塊與「更多專案」折疊；頁面較短，風格較混。",en:"Trade-off: dynamic look with the static site's metric boxes and collapsed 'more'; shorter."},
+ C:{zh:"取捨：每個專案一張寬卡，文字在左、截圖在右並排；截圖最醒目，但頁面最長，手機會上下排。",en:"Trade-off: one wide card per project, text left and screenshots right; most visual, longest."}
+};
+function view(){
+  if(S.v==="A") return head()+`<div class="panel"><div class="grid2">${D.projects.map(p=>`<div class="glow card"><div class="cat mono">${p.cat}</div><h4>${esc(t(p.title))}</h4><div class="sub">${esc(t(p.sub))}</div>${metricsPlain(p)}${flow(p)}${bullets(p)}${tags(p.tech)}${shots(p.img)}${link(p)}</div>`).join("")}</div>${moreCards()}</div>`;
+  if(S.v==="B") return head()+`<div class="panel"><div class="grid2">${D.projects.map(p=>`<div class="glow card"><div class="cat mono">${p.cat}</div><h4>${esc(t(p.title))}</h4><div class="sub">${esc(t(p.sub))}</div>${metricsBox(p)}${flow(p)}${bullets(p)}${tags(p.tech)}${shots(p.img)}${link(p)}</div>`).join("")}</div><button class="toggle" data-more>${S.more?"− "+t(D.ui.hideMore):"+ "+t(D.ui.showMore)+" ("+D.more.length+")"}</button>${S.more?moreCards():""}</div>`;
+  return head()+`<div class="panel">${D.projects.map(p=>`<div class="glow wide"><div><div class="cat mono">${p.cat}</div><h4 style="font-size:26px;font-weight:700;margin-top:2px">${esc(t(p.title))}</h4><div class="sub">${esc(t(p.sub))}</div>${metricsPlain(p)}${flow(p)}${bullets(p)}${tags(p.tech)}${link(p)}</div>${shots(p.img)}</div>`).join("")}${moreCards()}</div>`;
+}
+function render(){
+  document.documentElement.lang=S.lang==="zh"?"zh-Hant":"en";
+  document.documentElement.dataset.theme=S.dark?"dark":"light";
+  document.querySelectorAll("#bar [data-v]").forEach(b=>b.classList.toggle("on",b.dataset.v===S.v));
+  document.getElementById("note").textContent=t(NOTES[S.v]);
+  document.getElementById("stage").innerHTML=view();
+}
+document.addEventListener("click",e=>{
+  let x;
+  if((x=e.target.closest("[data-v]"))){S.v=x.dataset.v;S.more=false;window.scrollTo(0,0)}
+  else if(e.target.closest("[data-th]")){S.dark=!S.dark}
+  else if(e.target.closest("[data-lang]")){S.lang=S.lang==="zh"?"en":"zh"}
+  else if(e.target.closest("[data-more]")){S.more=!S.more}
+  else return;
+  render();
+});
+document.addEventListener("mousemove",e=>{
+  const g=e.target.closest(".glow"); if(!g) return;
+  const r=g.getBoundingClientRect(); g.style.setProperty("--mx",(e.clientX-r.left)+"px"); g.style.setProperty("--my",(e.clientY-r.top)+"px");
+});
+render();
+</script>
+</body>
+</html>
