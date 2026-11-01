@@ -53,8 +53,14 @@
     <div class="tiles reveal">${D.metrics.map((m) => `<div class="tile"><b>${m.v}</b><span>${t(m)}${m.asof ? asof() : ""}</span></div>`).join("")}</div>`;
   }
 
+  // 卡片載入 WebP 縮圖（約 500px 顯示寬 × 2），點開才載入大圖；寬高屬性預留版面，避免載入時跳動
+  const imgName = (src) => src.replace(/^.*\//, "").replace(/\.\w+$/, "");
   const shots = (img) => img
-    ? `<div class="shots">${[].concat(img).map((m) => `<figure class="shot"><a href="${m.src}" target="_blank" rel="noopener noreferrer"><img src="${m.src}" alt="${esc(t(m))}" loading="lazy"></a><figcaption>${esc(t(m))}</figcaption></figure>`).join("")}</div>`
+    ? `<div class="shots">${[].concat(img).map((m) => {
+        const n = imgName(m.src), dim = (window.IMG_META || {})[n];
+        const size = dim ? ` width="${dim[0]}" height="${dim[1]}"` : "";
+        return `<figure class="shot"><a href="assets/img/full/${n}.webp" target="_blank" rel="noopener noreferrer"><img src="assets/img/thumb/${n}.webp"${size} alt="${esc(t(m))}" loading="lazy" decoding="async"></a><figcaption>${esc(t(m))}</figcaption></figure>`;
+      }).join("")}</div>`
     : "";
 
   function stack() {
