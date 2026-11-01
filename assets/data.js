@@ -187,7 +187,8 @@ window.SITE = {
         { src: "assets/img/jobfinder-arch.png", zh: "104 職缺日報每日資料管線架構圖", en: "104 Job Finder daily pipeline architecture" },
         { src: "assets/img/jobfinder-webui.png", zh: "Web UI 候選清單：三道閘門篩選與深評結果（公司與職缺名稱已隱藏）", en: "Web UI candidate list: three gates and deep scores (company and job titles hidden)" },
         { src: "assets/img/jobfinder-tailor.png", zh: "履歷修改建議：深評五維度雷達圖與依據（公司與職缺名稱已隱藏）", en: "Resume-tailoring view: five-dimension radar and evidence (company and job title hidden)" },
-        { src: "assets/img/jobfinder-tailor-2.png", zh: "逐條判定必備條件，並列 104 原文對照", en: "Per-requirement verdicts next to the original 104 posting" }
+        { src: "assets/img/jobfinder-tailor-2.png", zh: "逐條判定必備條件，並列 104 原文對照", en: "Per-requirement verdicts next to the original 104 posting" },
+        { src: "assets/img/jobfinder-trends.png", zh: "技能趨勢分析（標示樣本數與偏誤）", en: "Skill trend analysis (sample sizes and biases labelled)" }
       ],
       metrics: [
         { v: "2,433", asof: true, zh: "不重複職缺（1,385 家公司）", en: "unique postings (1,385 companies)" },
