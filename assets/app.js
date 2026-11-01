@@ -74,6 +74,7 @@
   function projects() {
     const card = (p) => `<article class="card proj reveal">
       <div class="cat mono">${p.cat}</div><h3>${esc(t(p.title))}</h3><div class="sub">${esc(t(p.sub))}</div>
+      ${p.img ? `<figure class="shot"><img src="${p.img.src}" alt="${esc(t(p.img))}" loading="lazy"><figcaption>${esc(t(p.img))}</figcaption></figure>` : ""}
       ${p.metrics.length ? `<div class="metrics">${p.metrics.map((m) => `<div class="metric"><b>${m.v}</b>${t(m)}${m.asof ? asof() : ""}</div>`).join("")}</div>` : ""}
       <div class="flow-label">${t(D.ui.flow)}</div>
       <div class="flow">${p.flow[S.lang].map((s) => `<span class="step">${esc(s)}</span>`).join('<span class="arrow">→</span>')}</div>

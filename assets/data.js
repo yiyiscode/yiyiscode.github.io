@@ -179,6 +179,7 @@ window.SITE = {
       title: { zh: "104 職缺日報", en: "104 Job Finder" },
       sub: { zh: "個人專案・獨立開發・2026/08 起", en: "Personal project · sole developer · since Aug 2026" },
       link: "https://github.com/yiyiscode/104-job-finder",
+      img: { src: "assets/img/jobfinder-arch.png", zh: "104 職缺日報每日資料管線架構圖", en: "104 Job Finder daily pipeline architecture" },
       metrics: [
         { v: "2,433", asof: true, zh: "不重複職缺（1,385 家公司）", en: "unique postings (1,385 companies)" },
         { v: "~1h → ~4m", zh: "每日人工篩選 → 全自動", en: "daily manual screening → automated" },
@@ -202,6 +203,7 @@ window.SITE = {
       title: { zh: "半導體晶圓缺陷分類", en: "Semiconductor Wafer Defect Classification" },
       sub: { zh: "自學專案・以 Codex 協作開發", en: "Self-directed project · built with Codex" },
       link: null,
+      img: { src: "assets/img/wafer-shap.png", zh: "SHAP 特徵重要性：pressure、temperature、etch rate", en: "SHAP feature importance: pressure, temperature, etch rate" },
       metrics: [
         { v: "0.14%", zh: "缺陷樣本比例（5,000 筆製程資料）", en: "defect rate (5,000 process records)" },
         { v: "100% → 0%", zh: "Holdout Test 漏判率 FNR", en: "holdout-test FNR" },
@@ -224,6 +226,7 @@ window.SITE = {
       title: { zh: "RAG 資安文件問答系統", en: "RAG Cybersecurity Document Q&A System" },
       sub: { zh: "FastAPI・地端部署", en: "FastAPI · on-premise" },
       link: null,
+      img: { src: "assets/img/rag-ui.png", zh: "SOC-style RAG 介面：回答附引用與檢索證據面板", en: "SOC-style RAG UI: answers with citations and a retrieved-evidence panel" },
       metrics: [],
       flow: {
         zh: ["文件上傳", "Chunking", "Retrieval", "Grounded 回答＋引用"],
@@ -242,6 +245,7 @@ window.SITE = {
       title: { zh: "兩階段羽球擊球動作分類（碩士論文）", en: "Two-Stage Badminton Stroke Classification (M.S. thesis)" },
       sub: { zh: "臺灣科技大學・楊傳凱教授指導", en: "NTUST · advised by Prof. Chuan-Kai Yang" },
       link: null,
+      img: { src: "assets/img/thesis-model-result.png", zh: "模型準確率比較：單一模型與兩階段模型（10 組隨機種子）", en: "Accuracy comparison: single model vs. two-stage model (10 random seeds)" },
       metrics: [
         { v: "89.70%", zh: "第一階段準確率", en: "stage-1 accuracy" },
         { v: "79.23%", zh: "整體準確率", en: "overall accuracy" },
