@@ -8,7 +8,6 @@
     lang: store.get("lang") || (/^zh/i.test(navigator.language) ? "zh" : "en"),
     theme: store.get("theme"),
     filter: "all",
-    more: false,
     menu: false
   };
   const t = (o) => o[S.lang];
@@ -55,13 +54,17 @@
 
   // 卡片載入 WebP 縮圖（約 500px 顯示寬 × 2），點開才載入大圖；寬高屬性預留版面，避免載入時跳動
   const imgName = (src) => src.replace(/^.*\//, "").replace(/\.\w+$/, "");
-  const shots = (img) => img
-    ? `<div class="shots">${[].concat(img).map((m) => {
-        const n = imgName(m.src), dim = (window.IMG_META || {})[n];
-        const size = dim ? ` width="${dim[0]}" height="${dim[1]}"` : "";
-        return `<figure class="shot"><a href="assets/img/full/${n}.webp" target="_blank" rel="noopener noreferrer"><img src="assets/img/thumb/${n}.webp"${size} alt="${esc(t(m))}" loading="lazy" decoding="async"></a><figcaption>${esc(t(m))}</figcaption></figure>`;
-      }).join("")}</div>`
-    : "";
+  const shots = (img, max = Infinity) => {
+    if (!img) return "";
+    const list = [].concat(img), extra = Math.max(0, list.length - max);
+    return `<div class="shots">${list.map((m, i) => {
+      const n = imgName(m.src), dim = (window.IMG_META || {})[n];
+      const size = dim ? ` width="${dim[0]}" height="${dim[1]}"` : "";
+      // 預覽最多 max 張，其餘仍在燈箱的左右切換裡
+      const badge = extra && i === max - 1 ? `<span class="shot-more">+${extra}</span>` : "";
+      return `<figure class="shot"${i >= max ? " hidden" : ""}><a href="assets/img/full/${n}.webp" target="_blank" rel="noopener noreferrer"><img src="assets/img/thumb/${n}.webp"${size} alt="${esc(t(m))}" loading="lazy" decoding="async"></a>${badge}<figcaption>${esc(t(m))}</figcaption></figure>`;
+    }).join("")}</div>`;
+  };
 
   function stack() {
     return `<section id="skills"><div class="sec-head reveal"><h2>${t(D.ui.stack)}</h2></div>
@@ -82,21 +85,23 @@
   }
 
   function projects() {
-    const card = (p) => `<article class="card proj reveal">
-      <div class="cat mono">${p.cat}</div><h3>${esc(t(p.title))}</h3><div class="sub">${esc(t(p.sub))}</div>
-      ${shots(p.img)}
-      ${p.metrics.length ? `<div class="metrics">${p.metrics.map((m) => `<div class="metric"><b>${m.v}</b>${t(m)}${m.asof ? asof() : ""}</div>`).join("")}</div>` : ""}
-      <div class="flow-label">${t(D.ui.flow)}</div>
-      <div class="flow">${p.flow[S.lang].map((s) => `<span class="step">${esc(s)}</span>`).join('<span class="arrow">→</span>')}</div>
-      <div class="hl-label">${t(D.ui.highlights)}</div>
-      <ul>${p.bullets.map((b) => `<li>${esc(t(b))}${b.asof ? asof() : ""}</li>`).join("")}</ul>
-      <div class="tags">${chips(p.tech)}</div>
-      ${p.link ? `<div class="card-actions"><a class="btn ghost" href="${p.link}" target="_blank" rel="noopener noreferrer">${ICON.gh} ${t(D.ui.github)}</a></div>` : ""}
+    const card = (p) => `<article class="card glow wide proj reveal">
+      <div>
+        <div class="cat mono">${p.cat}</div><h3>${esc(t(p.title))}</h3><div class="sub">${esc(t(p.sub))}</div>
+        ${p.metrics.length ? `<div class="metrics">${p.metrics.map((m) => `<div class="metric"><b class="mono">${m.v}</b>${t(m)}${m.asof ? asof() : ""}</div>`).join("")}</div>` : ""}
+        <div class="flow">${p.flow[S.lang].map((s) => `<span class="step mono">${esc(s)}</span>`).join('<span class="arrow">→</span>')}</div>
+        <ul>${p.bullets.map((b) => `<li>${esc(t(b))}${b.asof ? asof() : ""}</li>`).join("")}</ul>
+        <div class="tags">${chips(p.tech)}</div>
+        ${p.link ? `<a class="proj-link mono" href="${p.link}" target="_blank" rel="noopener noreferrer">${t(D.ui.github)} ↗</a>` : ""}
+      </div>
+      ${shots(p.img, 3)}
     </article>`;
-    return `<section id="projects"><div class="sec-head reveal"><span class="pill">${t(D.ui.projBadge)}</span><h2>${t(D.ui.projTitle)}</h2><p>${t(D.ui.projSub)}</p></div>
-      <div class="proj-grid">${D.projects.map(card).join("")}</div>
-      <button class="more-toggle" data-more aria-expanded="${S.more}">${S.more ? "− " + t(D.ui.hideMore) : "+ " + t(D.ui.showMore) + " (" + D.more.length + ")"}</button>
-      <div class="more-grid ${S.more ? "show" : ""}">${D.more.map((m) => `<div class="card"><h3>${esc(t(m.title))}</h3><p>${esc(t(m.desc))}</p><div class="tags">${chips(m.tech)}</div>${shots(m.img)}</div>`).join("")}</div></section>`;
+    return `<section id="projects"><div class="reveal"><div class="hdr mono"><b>04</b><i>//</i><span>${t(D.ui.projBadge)}</span></div>
+      <h2 class="proj-title grad">${t(D.ui.projTitle)}</h2><p class="proj-sub">${t(D.ui.projSub)}</p></div>
+      <div class="panel">${D.projects.map(card).join("")}
+        <div class="more-h mono">${t(D.ui.moreTitle).toUpperCase()}</div>
+        <div class="more-grid">${D.more.map((m) => `<div class="card glow reveal"><h3>${esc(t(m.title))}</h3><p>${esc(t(m.desc))}</p><div class="tags">${chips(m.tech)}</div>${shots(m.img, 3)}</div>`).join("")}</div>
+      </div></section>`;
   }
 
   function contact() {
@@ -149,6 +154,12 @@
     document.body.appendChild(lb); document.body.style.overflow = "hidden";
     lbShow(lbList.indexOf(a)); lb.querySelector(".lb-x").focus();
   };
+  document.addEventListener("mousemove", (e) => {
+    const g = e.target.closest && e.target.closest(".glow");
+    if (!g) return;
+    const r = g.getBoundingClientRect();
+    g.style.setProperty("--mx", (e.clientX - r.left) + "px"); g.style.setProperty("--my", (e.clientY - r.top) + "px");
+  });
   document.addEventListener("keydown", (e) => {
     if (!lb) return;
     if (e.key === "Escape") lbClose();
@@ -169,7 +180,6 @@
     }
     if ((x = q("[data-lang]"))) { S.lang = x.dataset.lang; store.set("lang", S.lang); }
     else if ((x = q("[data-filter]"))) { S.filter = x.dataset.filter; }
-    else if (q("[data-more]")) { S.more = !S.more; }
     else if (q("[data-theme-toggle]")) {
       const dark = S.theme ? S.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
       S.theme = dark ? "light" : "dark"; store.set("theme", S.theme);
