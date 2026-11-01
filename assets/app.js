@@ -53,6 +53,10 @@
     <div class="tiles reveal">${D.metrics.map((m) => `<div class="tile"><b>${m.v}</b><span>${t(m)}${m.asof ? asof() : ""}</span></div>`).join("")}</div>`;
   }
 
+  const shots = (img) => img
+    ? `<div class="shots">${[].concat(img).map((m) => `<figure class="shot"><a href="${m.src}" target="_blank" rel="noopener noreferrer"><img src="${m.src}" alt="${esc(t(m))}" loading="lazy"></a><figcaption>${esc(t(m))}</figcaption></figure>`).join("")}</div>`
+    : "";
+
   function stack() {
     return `<section id="skills"><div class="sec-head reveal"><h2>${t(D.ui.stack)}</h2></div>
       <div class="stack">${D.stack.map((g) => `<div class="stack-card reveal"><h3>${t(g.l)}</h3>${chips(g.i)}</div>`).join("")}</div>
@@ -68,13 +72,13 @@
         <div class="tl-top"><span class="date mono">${period(i.start, i.end)}</span><span class="tag-pill">${t(i.badge)}</span></div>
         <div class="tl-org">${t(i.org)}</div><h3>${t(i.role)}</h3>
         <ul>${i.bullets.map((b) => `<li>${esc(t(b))}</li>`).join("")}</ul>
-        ${i.tech.length ? `<div class="tags">${chips(i.tech)}</div>` : ""}</div></div>`).join("")}</div></section>`;
+        ${i.tech.length ? `<div class="tags">${chips(i.tech)}</div>` : ""}${shots(i.img)}</div></div>`).join("")}</div></section>`;
   }
 
   function projects() {
     const card = (p) => `<article class="card proj reveal">
       <div class="cat mono">${p.cat}</div><h3>${esc(t(p.title))}</h3><div class="sub">${esc(t(p.sub))}</div>
-      ${p.img ? `<figure class="shot"><img src="${p.img.src}" alt="${esc(t(p.img))}" loading="lazy"><figcaption>${esc(t(p.img))}</figcaption></figure>` : ""}
+      ${shots(p.img)}
       ${p.metrics.length ? `<div class="metrics">${p.metrics.map((m) => `<div class="metric"><b>${m.v}</b>${t(m)}${m.asof ? asof() : ""}</div>`).join("")}</div>` : ""}
       <div class="flow-label">${t(D.ui.flow)}</div>
       <div class="flow">${p.flow[S.lang].map((s) => `<span class="step">${esc(s)}</span>`).join('<span class="arrow">→</span>')}</div>

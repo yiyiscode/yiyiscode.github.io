@@ -99,7 +99,11 @@ window.SITE = {
         { zh: "自建資料分析與視覺化 BI 工具，支援特徵探索與錯誤分析，加速模型迭代。", en: "Built custom data analysis and BI visualization tools to support feature exploration, error analysis and faster model iteration." },
         { zh: "建立惡意網址分類模型，設計 BERT Embedding + CNN 混合架構，準確率（Accuracy）達 99.84%。", en: "Architected a malicious URL classifier with a hybrid BERT Embedding + CNN framework, reaching 99.84% accuracy." }
       ],
-      tech: ["Python", "PyTorch", "BERT", "CNN", "Streamlit", "Plotly", "Pandas", "NumPy"]
+      tech: ["Python", "PyTorch", "BERT", "CNN", "Streamlit", "Plotly", "Pandas", "NumPy"],
+      img: [
+        { src: "assets/img/cathay-architecture.png", zh: "專案架構圖：資安大數據分析平台", en: "Project architecture: cybersecurity big-data analysis platform" },
+        { src: "assets/img/cathay-model.png", zh: "CNN 模型架構（參考論文：Detection of Malicious URL Based on BERT-CNN）", en: "CNN model architecture (reference: Detection of Malicious URL Based on BERT-CNN)" }
+      ]
     },
     {
       k: "work", start: "2024-02", end: "2024-07",
@@ -179,7 +183,10 @@ window.SITE = {
       title: { zh: "104 職缺日報", en: "104 Job Finder" },
       sub: { zh: "個人專案・獨立開發・2026/08 起", en: "Personal project · sole developer · since Aug 2026" },
       link: "https://github.com/yiyiscode/104-job-finder",
-      img: { src: "assets/img/jobfinder-arch.png", zh: "104 職缺日報每日資料管線架構圖", en: "104 Job Finder daily pipeline architecture" },
+      img: [
+        { src: "assets/img/jobfinder-arch.png", zh: "104 職缺日報每日資料管線架構圖", en: "104 Job Finder daily pipeline architecture" },
+        { src: "assets/img/jobfinder-tailor.png", zh: "履歷修改建議畫面（公司與職缺名稱已隱藏）", en: "Resume-tailoring view (company and job title hidden)" }
+      ],
       metrics: [
         { v: "2,433", asof: true, zh: "不重複職缺（1,385 家公司）", en: "unique postings (1,385 companies)" },
         { v: "~1h → ~4m", zh: "每日人工篩選 → 全自動", en: "daily manual screening → automated" },
