@@ -113,6 +113,11 @@ section { padding: 72px 0 24px; }
 .card li { position: relative; padding-left: 16px; font-size: 18px; color: var(--muted); line-height: 1.7; }
 .card li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 .card .tags { margin-top: 14px; }
+/* 有圖片的經歷卡：字在左、圖在右（規則見 personal-site-decisions） */
+.card.split { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: start; }
+.card.split .shots { margin-top: 0; }
+.card.split .shot img { height: 160px; }
+@media (max-width: 860px) { .card.split { grid-template-columns: 1fr; } .card.split .shots { margin-top: 18px; } }
 
 /* projects：參考動態版的作品區（面板、聚光卡片、等寬標籤、無底色大數字），每個專案一張寬卡，文字在左、截圖在右 */
 .hdr { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; opacity: .85; margin-bottom: 8px; }

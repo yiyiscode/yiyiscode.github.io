@@ -77,11 +77,11 @@
     const items = D.timeline.filter((i) => S.filter === "all" || i.k === S.filter);
     return `<section id="experience"><div class="sec-head reveal"><span class="pill">${t(D.ui.tlBadge)}</span><h2>${t(D.ui.tlTitle)}</h2><p>${t(D.ui.tlSub)}</p>
       <div class="filters">${t(D.ui.filters).map(([k, l]) => `<button data-filter="${k}" class="${S.filter === k ? "on" : ""}">${l}</button>`).join("")}</div></div>
-      <div class="tl">${items.map((i) => `<div class="tl-item reveal"><div class="card">
+      <div class="tl">${items.map((i) => `<div class="tl-item reveal"><div class="card${i.img ? " split" : ""}"><div class="tl-text">
         <div class="tl-top"><span class="date mono">${period(i.start, i.end)}</span><span class="tag-pill">${t(i.badge)}</span></div>
         <div class="tl-org">${t(i.org)}</div><h3>${t(i.role)}</h3>
         <ul>${i.bullets.map((b) => `<li>${esc(t(b))}</li>`).join("")}</ul>
-        ${i.tech.length ? `<div class="tags">${chips(i.tech)}</div>` : ""}${shots(i.img)}</div></div>`).join("")}</div></section>`;
+        ${i.tech.length ? `<div class="tags">${chips(i.tech)}</div>` : ""}</div>${shots(i.img)}</div></div>`).join("")}</div></section>`;
   }
 
   function projects() {
