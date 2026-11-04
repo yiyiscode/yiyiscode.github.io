@@ -9,11 +9,11 @@
     theme: store.get("theme"),
     filter: "all",
     menu: false,
-    resume: false
+    resume: {}
   };
-  const RESUME = "assets/Resume.pdf"; // 檔案不存在時按鈕不顯示（見檔尾 HEAD 檢查）
+  const RESUME = (l) => `assets/Resume.${l}.pdf`; // 隨語言切換；該語言檔案不存在時按鈕不顯示（見檔尾 HEAD 檢查）
   const t = (o) => o[S.lang];
-  const resumeBtn = (cls) => S.resume ? `<a class="btn ${cls}" href="${RESUME}" download>${ICON.dl} ${t(D.ui.resume)}</a>` : "";
+  const resumeBtn = (cls) => S.resume[S.lang] ? `<a class="btn ${cls}" href="${RESUME(S.lang)}" download>${ICON.dl} ${t(D.ui.resume)}</a>` : "";
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const ym = (s) => {
@@ -197,5 +197,5 @@
   });
 
   render();
-  fetch(RESUME, { method: "HEAD" }).then((r) => { if (r.ok) { S.resume = true; render(); } }).catch(() => {});
+  ["zh", "en"].forEach((l) => fetch(RESUME(l), { method: "HEAD" }).then((r) => { if (r.ok) { S.resume[l] = true; render(); } }).catch(() => {}));
 })();
