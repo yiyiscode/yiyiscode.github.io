@@ -5,6 +5,7 @@ window.SITE = {
   initials: "FY",
   email: "az045317@gmail.com",
   github: "github.com/yiyiscode",
+  dynamicUrl: "https://yiyiscode.github.io/portfolio-dynamic/",
   titles: {
     zh: "林芳義｜資料／AI 工程師",
     en: "Fang-Yi Lin | Data & AI Engineer"
@@ -21,6 +22,8 @@ window.SITE = {
     },
     cta1: { zh: "瀏覽作品", en: "Explore Projects" },
     cta2: { zh: "寄信給我", en: "Email Me" },
+    resume: { zh: "下載履歷 (PDF)", en: "Download Resume (PDF)" },
+    dynamic: { zh: "動態版網站", en: "Animated version" },
     stack: { zh: "技術堆疊", en: "Tech Stack" },
     tlBadge: { zh: "經歷軌跡", en: "Career Trajectory" },
     tlTitle: { zh: "經歷與成果時間軸", en: "Experience & Impact Timeline" },
