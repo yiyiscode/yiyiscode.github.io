@@ -8,9 +8,12 @@
     lang: store.get("lang") || (/^zh/i.test(navigator.language) ? "zh" : "en"),
     theme: store.get("theme"),
     filter: "all",
-    menu: false
+    menu: false,
+    resume: false
   };
+  const RESUME = "assets/Resume.pdf"; // 檔案不存在時按鈕不顯示（見檔尾 HEAD 檢查）
   const t = (o) => o[S.lang];
+  const resumeBtn = (cls) => S.resume ? `<a class="btn ${cls}" href="${RESUME}" download>${ICON.dl} ${t(D.ui.resume)}</a>` : "";
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const ym = (s) => {
@@ -26,6 +29,8 @@
     mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
     theme: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
     menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+    dl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/></svg>',
+    spark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7z"/></svg>',
     arrow: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>'
   };
 
@@ -37,6 +42,7 @@
         <div class="seg" role="group" aria-label="Language"><button data-lang="zh" class="${S.lang === "zh" ? "on" : ""}">中</button><button data-lang="en" class="${S.lang === "en" ? "on" : ""}">EN</button></div>
         <button class="icon-btn" data-theme-toggle aria-label="${t(D.ui.theme)}" title="${t(D.ui.theme)}">${ICON.theme}</button>
         <a class="icon-btn" href="https://${D.github}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">${ICON.gh}</a>
+        <a class="icon-btn" href="${D.dynamicUrl}" target="_blank" rel="noopener noreferrer" aria-label="${t(D.ui.dynamic)}" title="${t(D.ui.dynamic)}">${ICON.spark}</a>
         <button class="icon-btn menu-btn" data-menu aria-label="Menu">${ICON.menu}</button>
       </div></div></header>`;
   }
@@ -46,8 +52,8 @@
       <div class="badge-live reveal"><span class="ping"></span>${t(D.ui.badge)}</div>
       <h1 class="reveal">${esc(t(D.name))}</h1>
       <p class="tag reveal">${t(D.ui.tag)}</p>
-      <div class="cta reveal"><a class="btn primary" href="#projects">${t(D.ui.cta1)} ${ICON.arrow}</a><a class="btn ghost" href="mailto:${D.email}">${ICON.mail} ${t(D.ui.cta2)}</a></div>
-      <div class="socials reveal"><a href="https://${D.github}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">${ICON.gh}</a><a href="mailto:${D.email}" aria-label="Email">${ICON.mail}</a></div>
+      <div class="cta reveal"><a class="btn primary" href="#projects">${t(D.ui.cta1)} ${ICON.arrow}</a><a class="btn ghost" href="mailto:${D.email}">${ICON.mail} ${t(D.ui.cta2)}</a>${resumeBtn("ghost")}</div>
+      <div class="socials reveal"><a href="https://${D.github}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">${ICON.gh}</a><a href="${D.dynamicUrl}" target="_blank" rel="noopener noreferrer" aria-label="${t(D.ui.dynamic)}" title="${t(D.ui.dynamic)}">${ICON.spark}</a><a href="mailto:${D.email}" aria-label="Email">${ICON.mail}</a></div>
     </section>
     <div class="tiles reveal">${D.metrics.map((m) => `<div class="tile"><b>${m.v}</b><span>${t(m)}${m.asof ? asof() : ""}</span></div>`).join("")}</div>`;
   }
@@ -106,7 +112,7 @@
 
   function contact() {
     return `<section id="contact" class="contact"><div class="sec-head reveal"><h2>${t(D.ui.contactTitle)}</h2><p>${t(D.ui.contactSub)}</p></div>
-      <div class="row reveal"><a class="btn primary" href="mailto:${D.email}">${ICON.mail} ${D.email}</a><a class="btn ghost" href="https://${D.github}" target="_blank" rel="noopener noreferrer">${ICON.gh} ${D.github}</a></div></section>`;
+      <div class="row reveal"><a class="btn primary" href="mailto:${D.email}">${ICON.mail} ${D.email}</a><a class="btn ghost" href="https://${D.github}" target="_blank" rel="noopener noreferrer">${ICON.gh} ${D.github}</a>${resumeBtn("ghost")}</div></section>`;
   }
 
   function render() {
@@ -191,4 +197,5 @@
   });
 
   render();
+  fetch(RESUME, { method: "HEAD" }).then((r) => { if (r.ok) { S.resume = true; render(); } }).catch(() => {});
 })();
